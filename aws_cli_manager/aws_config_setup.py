@@ -16,11 +16,9 @@ aws_cred_path = f'{aws_root_dir}/credentials'
 @click.command()
 @click.option('--initial_setup', is_flag = True, help = 'First time setup for configuration and credentials files in ~/.aws')
 @click.option('--mfa', is_flag = True)
-@click.option('--fetch_session', default = '', help = 'If you have a mfa, token follows the flag')
-@click.option('--profile', default = '', help = 'Profile you are executing command for/on')
 
 
-def cli(mfa, initial_setup, profile, fetch_session):
+def cli(mfa, initial_setup):
     '''Doing checks, building profile, and installing necessary things'''
     click.echo('Bleep Bloop')
 
@@ -109,4 +107,7 @@ def usr_mfa_fetch(profile, mfa_token):
     aws_mfa_fetch_command = os.popen(f'aws --profile {profile} sts get-session-token --duration 129600 --serial-number {mfa_arn} --token-code {mfa_token}')
     session_token = aws_mfa_fetch_command.read()
     click.echo(f'The MFA Arn for {profile} is: {mfa_arn}\nTempAccessKey: {session_token}')
+    config.read(f'{aws_cred_path}')
+    config.sections()
+    config[profile]['aws_session_token'] = f'{session_token}'
 
