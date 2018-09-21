@@ -1,0 +1,4 @@
+
+[console_scripts]
+skothaws = aws_config_setup:cli
+    

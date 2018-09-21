@@ -1,0 +1,7 @@
+aws_config_setup.py
+skothaws.egg-info/PKG-INFO
+skothaws.egg-info/SOURCES.txt
+skothaws.egg-info/dependency_links.txt
+skothaws.egg-info/entry_points.txt
+skothaws.egg-info/requires.txt
+skothaws.egg-info/top_level.txt
